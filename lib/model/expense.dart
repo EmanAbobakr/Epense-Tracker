@@ -1,7 +1,9 @@
-import 'package:flutter/foundation.dart';
+import 'package:expense_tracker/Category.dart';
+import 'package:intl/intl.dart';
 import 'package:uuid/uuid.dart';
 
 const uuid = Uuid();
+final formatter = DateFormat.yMd();
 
 class Expense {
   Expense({
@@ -16,4 +18,8 @@ class Expense {
   final double amount;
   final DateTime date;
   final Category category;
+
+  String get formattedDate {
+    return formatter.format(date);
+  }
 }
