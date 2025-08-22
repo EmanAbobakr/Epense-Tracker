@@ -1,3 +1,4 @@
+import 'package:expense_tracker/model/expense.dart';
 import 'package:expense_tracker/widgets/expenses_list/expenses_list.dart';
 import 'package:expense_tracker/widgets/new_expense.dart';
 import 'package:flutter/material.dart';
@@ -12,10 +13,19 @@ class Expenses extends StatefulWidget {
 }
 
 class _ExpensesState extends State<Expenses> {
+  List<Expense> registeredExpenses = [];
+
+  void _saveSubmitedExpenseData(Expense newExpense) {
+    setState(() {
+      registeredExpenses.add(newExpense);
+    });
+  }
+
   void _onAddExpenseClicked() {
     showModalBottomSheet(
+      isScrollControlled: true,
       context: context,
-      builder: (ctx) => const NewExpense(),
+      builder: (ctx) => NewExpense(onAddExpense: _saveSubmitedExpenseData),
     );
   }
 
@@ -29,10 +39,10 @@ class _ExpensesState extends State<Expenses> {
         ],
       ),
       body: Center(
-        child: const Column(
+        child: Column(
           children: [
             Text("Expenses"),
-            Expanded(child: ExpensesList()),
+            Expanded(child: ExpensesList(registeredExpenses)),
           ],
         ),
       ),
