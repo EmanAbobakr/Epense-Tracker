@@ -3,9 +3,14 @@ import 'package:expense_tracker/model/expense.dart';
 import 'package:flutter/widgets.dart';
 
 class ExpensesList extends StatefulWidget {
-  const ExpensesList(this.registeredExpenses, {super.key});
+  const ExpensesList({
+    required this.registeredExpenses,
+    required this.onDismiss,
+    super.key,
+  });
 
   final List<Expense> registeredExpenses;
+  final void Function(Expense expense) onDismiss;
 
   @override
   State<StatefulWidget> createState() {
@@ -52,7 +57,13 @@ class _ExpensesListState extends State<ExpensesList> {
     return ListView.builder(
       itemCount: widget.registeredExpenses.length,
       itemBuilder: (ctx, index) {
-        return (ExpenseItem(widget.registeredExpenses[index]));
+        return Dismissible(
+          key: ValueKey(widget.registeredExpenses[index]),
+          onDismissed: (direction) {
+            widget.onDismiss(widget.registeredExpenses[index]);
+          },
+          child: (ExpenseItem(widget.registeredExpenses[index])),
+        );
       },
     );
   }
