@@ -49,10 +49,12 @@ class _ExpensesState extends State<Expenses> {
           children: [
             Text("Expenses"),
             Expanded(
-              child: ExpensesList(
-                registeredExpenses: registeredExpenses,
-                onDismiss: _removeExpense,
-              ),
+              child: registeredExpenses.isEmpty
+                  ? Center(child: Text('No expenses found. Start adding some!'))
+                  : ExpensesList(
+                      registeredExpenses: registeredExpenses,
+                      onDismiss: _removeExpense,
+                    ),
             ),
           ],
         ),
