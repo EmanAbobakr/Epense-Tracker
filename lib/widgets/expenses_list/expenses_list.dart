@@ -10,7 +10,7 @@ class ExpensesList extends StatefulWidget {
   });
 
   final List<Expense> registeredExpenses;
-  final void Function(Expense expense) onDismiss;
+  final void Function(int expenseIndex) onDismiss;
 
   @override
   State<StatefulWidget> createState() {
@@ -60,7 +60,7 @@ class _ExpensesListState extends State<ExpensesList> {
         return Dismissible(
           key: ValueKey(widget.registeredExpenses[index]),
           onDismissed: (direction) {
-            widget.onDismiss(widget.registeredExpenses[index]);
+            widget.onDismiss(index);
           },
           child: (ExpenseItem(widget.registeredExpenses[index])),
         );

@@ -21,10 +21,26 @@ class _ExpensesState extends State<Expenses> {
     });
   }
 
-  void _removeExpense(Expense expense) {
+  void _removeExpense(int expenseIndex) {
+    final reomvedExpense = registeredExpenses[expenseIndex];
     setState(() {
-      registeredExpenses.remove(expense);
+      registeredExpenses.remove(registeredExpenses[expenseIndex]);
     });
+    ScaffoldMessenger.of(context).clearSnackBars();
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        duration: Duration(seconds: 3),
+        content: Text('Expense Deleted'),
+        action: SnackBarAction(
+          label: 'Undo',
+          onPressed: () {
+            setState(() {
+              registeredExpenses.insert(expenseIndex, reomvedExpense);
+            });
+          },
+        ),
+      ),
+    );
   }
 
   void _onAddExpenseClicked() {
