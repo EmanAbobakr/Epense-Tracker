@@ -1,6 +1,6 @@
 import 'package:expense_tracker/widgets/expenses_list/expense_item.dart';
 import 'package:expense_tracker/model/expense.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 
 class ExpensesList extends StatefulWidget {
   const ExpensesList({
@@ -59,6 +59,12 @@ class _ExpensesListState extends State<ExpensesList> {
       itemBuilder: (ctx, index) {
         return Dismissible(
           key: ValueKey(widget.registeredExpenses[index]),
+          background: Container(
+            color: Theme.of(context).colorScheme.error.withValues(alpha: 0.75),
+            margin: EdgeInsets.symmetric(
+              horizontal: Theme.of(context).cardTheme.margin!.horizontal,
+            ),
+          ),
           onDismissed: (direction) {
             widget.onDismiss(index);
           },
