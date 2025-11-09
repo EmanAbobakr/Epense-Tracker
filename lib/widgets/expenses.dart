@@ -1,3 +1,4 @@
+import 'package:expense_tracker/Category.dart';
 import 'package:expense_tracker/model/expense.dart';
 import 'package:expense_tracker/widgets/expenses_list/expenses_list.dart';
 import 'package:expense_tracker/widgets/new_expense.dart';
@@ -13,7 +14,38 @@ class Expenses extends StatefulWidget {
 }
 
 class _ExpensesState extends State<Expenses> {
-  List<Expense> registeredExpenses = [];
+  List<Expense> registeredExpenses = [
+    Expense(
+      title: 'New Shoes',
+      amount: 69.99,
+      date: DateTime.now(),
+      category: Category.clothes,
+    ),
+    Expense(
+      title: 'Groceries',
+      amount: 16.53,
+      date: DateTime.now(),
+      category: Category.food,
+    ),
+    Expense(
+      title: 'Gym Membership',
+      amount: 29.99,
+      date: DateTime.now(),
+      category: Category.leisure,
+    ),
+    Expense(
+      title: 'Utilities',
+      amount: 89.99,
+      date: DateTime.now(),
+      category: Category.work,
+    ),
+    Expense(
+      title: 'New Shoes',
+      amount: 69.99,
+      date: DateTime.now(),
+      category: Category.clothes,
+    ),
+  ];
 
   void _saveSubmitedExpenseData(Expense newExpense) {
     setState(() {
